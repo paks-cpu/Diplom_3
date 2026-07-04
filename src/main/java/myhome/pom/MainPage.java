@@ -1,4 +1,4 @@
-package myhome.pageObject;
+package myhome.pom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +7,6 @@ import io.qameta.allure.Step;
 
 public class MainPage {
     private final WebDriver driver;
-    private WebDriverWait wait;
 
     //Кнопка "Войти в аккаунт"
     final By loginAccountButton = By.xpath("//button[text()='Войти в аккаунт']");

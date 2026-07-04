@@ -1,4 +1,4 @@
-import myhome.pageObject.*;
+import myhome.pom.*;
 import org.junit.After;
 import org.junit.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -7,8 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
-
-import static myhome.Resources.HOME_PAGE;
+import myhome.Resources;
 
 public class BaseTest {
 
@@ -32,7 +31,7 @@ public class BaseTest {
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));// Добавляем неявное ожидание
         driver.manage().window().maximize();// Открыть окно браузера на весь экран
-        driver.get(HOME_PAGE);
+        driver.get(Resources.HOME_PAGE);
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 

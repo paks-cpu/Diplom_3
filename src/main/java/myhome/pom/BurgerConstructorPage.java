@@ -1,19 +1,15 @@
-package myhome.pageObject;
+package myhome.pom;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BurgerConstructorPage {
     private final WebDriver driver;
-    private final WebDriverWait wait;
 
     public BurgerConstructorPage(WebDriver driver, WebDriverWait wait){
         this.driver = driver;
-        this.wait = wait;
     }
 
     private final By tabBunIngredients = By.xpath("//span[text()='Булки']");
@@ -23,15 +19,15 @@ public class BurgerConstructorPage {
     private final By tabFillingIngredients = By.xpath("//span[text()='Начинки']");
     private final By activeTabFillingIngredients = By.xpath("//span[text()='Начинки']/parent::div[contains(@class, 'tab_tab_type_current')]");
 
-    @Step
-    public void switchToBuns(){
-        driver.findElement(tabBunIngredients).click();
+    @Step("Нажатие на вкладку Булки")
+    public void switchToBuns(){ driver.findElement(
+            tabBunIngredients).click();
     }
     @Step("Вкладка Булки стала активной (имеет класс текущей вкладки)")
     public boolean activeTabBunIngredients(){
         return driver.findElement(activeTabBunIngredients).isDisplayed();
     }
-    @Step
+    @Step("Нажатие на вкладку Соусы")
     public void switchToSauce(){
         driver.findElement(tabSauceIngredients).click();
     }
@@ -39,7 +35,7 @@ public class BurgerConstructorPage {
     public boolean activeTabSauceIngredients(){
         return driver.findElement(activeTabSauceIngredients).isDisplayed();
     }
-    @Step
+    @Step("Нажатие на вкладку Начинки")
     public void switchToFilling(){
         driver.findElement(tabFillingIngredients).click();
     }

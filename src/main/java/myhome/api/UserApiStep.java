@@ -4,27 +4,24 @@ import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-
 import static io.restassured.RestAssured.*;
-import static myhome.Resources.HOME_PAGE;
+import myhome.Resources;
 
 public class UserApiStep {
 
-    public static final String POST_REGISTER_USER = "/api/auth/register"; //создание пользователя
-    public static final String DELETE_USER = "/api/auth/user"; //удаление полььзователя
 
 
     public static RequestSpecification getBaseSpec() {
         return given().log().all()
                 .contentType(ContentType.JSON)
-                .baseUri(HOME_PAGE);
+                .baseUri(Resources.HOME_PAGE);
     }
 
     @Step("Создание нового пользователя")
     public String registeredAndGetToken(UserCreateRequest userCreateRequest) {
         Response response = getBaseSpec()
                 .body(userCreateRequest)
-                .post(POST_REGISTER_USER)
+                .post(Resources.POST_REGISTRATION_USER)
                 .then()
                 .statusCode(200)
                 .extract()
@@ -47,8 +44,25 @@ public class UserApiStep {
                 .spec(getBaseSpec())
                 .log().all()
                 .header("Authorization", accessToken)
-                .delete(DELETE_USER)
+                .delete(Resources.DELETE_USER)
                 .then()
                 .statusCode(202);
+    }
+
+    @Step("Авторизация пользователя и получение его токена")
+    public String authUserAndGetToken(UserLoginRequest userLoginRequest){
+        Response response = getBaseSpec()
+                .body(userLoginRequest)
+                .post(Resources.AUTHORIZATION_PAGE)
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
+
+        String accessToken = response.jsonPath().get("accessToken");
+        if (accessToken == null || accessToken.isBlank()){
+            throw new IllegalStateException("Не удалось извлечь token из ответа API");
+        }
+        return accessToken;
     }
 }

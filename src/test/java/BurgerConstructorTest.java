@@ -1,6 +1,6 @@
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
-import myhome.pageObject.BurgerConstructorPage;
+import myhome.pom.BurgerConstructorPage;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ public class BurgerConstructorTest extends BaseTest{
 
     @Before
     public void setUpPage() {
-    burgerConstructorPage = new BurgerConstructorPage(driver, wait);
+        burgerConstructorPage = new BurgerConstructorPage(driver, wait);
     }
 
     @Test

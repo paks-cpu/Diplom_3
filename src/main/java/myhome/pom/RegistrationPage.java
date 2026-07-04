@@ -1,11 +1,8 @@
-package myhome.pageObject;
+package myhome.pom;
 
 import io.qameta.allure.Step;
-import myhome.Resources;
-import myhome.Resources.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -58,13 +55,13 @@ public class RegistrationPage {
         driver.findElement(buttonEnterForRegistrationOnRegistrationPage).click();
     }
 
-    @Step("Отображение ошибки неправильного пароля")
+    @Step("Ошибка неправильного пароля видна")
     public boolean errorMessageIncorrectPasswordDisplayed() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessageIncorrectPasswordOnRegistrationPage)).isDisplayed();
     }
 
-    @Step("Отображение кнопки Войти на странице авторизации")
-    public void visibleButtonEnterForRegistrationOnRegistrationPage() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(buttonEnterForRegistrationOnRegistrationPage));
+    @Step("Кнопки Войти на странице авторизации видна")
+    public boolean visibleButtonEnterForRegistrationOnRegistrationPage() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(buttonEnterForRegistrationOnRegistrationPage)).isDisplayed();
     }
 }

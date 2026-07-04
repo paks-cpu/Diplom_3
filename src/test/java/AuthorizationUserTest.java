@@ -22,9 +22,6 @@ public class AuthorizationUserTest extends BaseTest{
         email = Resources.faker.internet().emailAddress();
         password = "TestPass123";
         accessToken = null;
-    }
-
-    private void createTestUser(){
         UserCreateRequest request = new UserCreateRequest(name, email, password);
         accessToken = userApiStep.registeredAndGetToken(request);
     }
@@ -33,11 +30,9 @@ public class AuthorizationUserTest extends BaseTest{
     @DisplayName("Вход по кнопке 'Войти в аккаунт' на главной странице")
     @Description("Успешная авторизация пользователя при вводе валидных данных")
     public void authNewUserOnMainPage(){
-        createTestUser();
-
         mainPage.clickLoginAccountButton();
-        driver.findElement(authorizationPage.emailInputField).sendKeys(email);
-        driver.findElement(authorizationPage.passwordInputField).sendKeys(password);
+        authorizationPage.sendEmailInFieldEmail(email);
+        authorizationPage.sendPasswordInFieldPassword(password);
         authorizationPage.clickEnterOnAuthPage();
         mainPage.clickPersonalAccountButton();
         authorizationPage.assertProfileLinkIsVisible();
@@ -47,11 +42,9 @@ public class AuthorizationUserTest extends BaseTest{
     @DisplayName("Вход через кнопку 'Личный кабинет'")
     @Description("Успешная авторизация пользователя при вводе валидных данных")
     public void authNewUserOnProfilePage(){
-        createTestUser();
-
         mainPage.clickPersonalAccountButton();
-        driver.findElement(authorizationPage.emailInputField).sendKeys(email);
-        driver.findElement(authorizationPage.passwordInputField).sendKeys(password);
+        authorizationPage.sendEmailInFieldEmail(email);
+        authorizationPage.sendPasswordInFieldPassword(password);
         authorizationPage.clickEnterOnAuthPage();
         mainPage.clickPersonalAccountButton();
         authorizationPage.assertProfileLinkIsVisible();
@@ -61,13 +54,11 @@ public class AuthorizationUserTest extends BaseTest{
     @DisplayName("Вход через кнопку в форме регистрации")
     @Description("Успешная авторизация пользователя при вводе валидных данных")
     public void authNewUserOnRegistrationPage(){
-        createTestUser();
-
         mainPage.clickLoginAccountButton();
         authorizationPage.clickButtonRegistrationOnAuthPage();
         registrationPage.clickButtonEnter();
-        driver.findElement(authorizationPage.emailInputField).sendKeys(email);
-        driver.findElement(authorizationPage.passwordInputField).sendKeys(password);
+        authorizationPage.sendEmailInFieldEmail(email);
+        authorizationPage.sendPasswordInFieldPassword(password);
         authorizationPage.clickEnterOnAuthPage();
         mainPage.clickPersonalAccountButton();
         authorizationPage.assertProfileLinkIsVisible();
@@ -78,13 +69,11 @@ public class AuthorizationUserTest extends BaseTest{
     @DisplayName("Вход через кнопку в форме восстановления пароля")
     @Description("Успешная авторизация пользователя при вводе валидных данных")
     public void authNewUserOnForgotPasswordPage(){
-        createTestUser();
-
         mainPage.clickLoginAccountButton();
         authorizationPage.clickForgotPasswordOnAuthPage();
         recoverThePasswordPage.clickButtonLoginLinkOnForgotPassword();
-        driver.findElement(authorizationPage.emailInputField).sendKeys(email);
-        driver.findElement(authorizationPage.passwordInputField).sendKeys(password);
+        authorizationPage.sendEmailInFieldEmail(email);
+        authorizationPage.sendPasswordInFieldPassword(password);
         authorizationPage.clickEnterOnAuthPage();
         mainPage.clickPersonalAccountButton();
         authorizationPage.assertProfileLinkIsVisible();

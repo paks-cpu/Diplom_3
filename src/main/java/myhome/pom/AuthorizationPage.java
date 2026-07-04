@@ -1,13 +1,10 @@
-package myhome.pageObject;
+package myhome.pom;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class AuthorizationPage {
     private final WebDriver driver;
@@ -49,5 +46,16 @@ public class AuthorizationPage {
     }
 
     @Step("Отображение кнопки Профиль на странице авторизации")
-    public void assertProfileLinkIsVisible(){wait.until(ExpectedConditions.visibilityOfElementLocated(buttonProfileLink));}
+    public void assertProfileLinkIsVisible(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(buttonProfileLink));
+    }
+
+    @Step("Ввод почты в поле email")
+    public void sendEmailInFieldEmail(String email){
+        driver.findElement(emailInputField).sendKeys(email);
+    }
+    @Step("Ввод пароля в поле password")
+    public void sendPasswordInFieldPassword(String password){
+        driver.findElement(passwordInputField).sendKeys(password);
+    }
 }
